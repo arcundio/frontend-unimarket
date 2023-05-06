@@ -11,6 +11,8 @@ import { ModInicioComponent } from './pagina/mod-inicio/mod-inicio.component';
 import { PqrsComponent } from './pagina/pqrs/pqrs.component';
 import { SubirImagenesComponent } from './pagina/subir-imagenes/subir-imagenes.component';
 import { RegistroComponent } from './pagina/registro/registro.component';
+import { BusquedaComponent } from './pagina/busqueda/busqueda.component';
+import { GestionProductosComponent } from './pagina/gestion-productos/gestion-productos.component';
 
 const routes: Routes = [
   { path: "", component: InicioComponent},
@@ -23,7 +25,9 @@ const routes: Routes = [
   { path: "mod-estado", component: ModEstadoComponent},
   { path: "mod-inicio", component: ModInicioComponent},
   { path: "pqrs", component: PqrsComponent},
-  { path: "subir-imagenes", component: SubirImagenesComponent}
+  { path: "subir-imagenes", component: SubirImagenesComponent},
+  { path: "busqueda/:texto", component: BusquedaComponent},
+  { path: "gestion-productos", component: GestionProductosComponent}
 ];
 
 @NgModule({

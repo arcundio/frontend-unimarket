@@ -14,6 +14,8 @@ import { ModInicioComponent } from './pagina/mod-inicio/mod-inicio.component';
 import { CrearComentarioComponent } from './pagina/crear-comentario/crear-comentario.component';
 import { ListarProductosComponent } from './pagina/listar-productos/listar-productos.component';
 import { RegistroComponent } from './pagina/registro/registro.component';
+import { BusquedaComponent } from './pagina/busqueda/busqueda.component';
+import { GestionProductosComponent } from './pagina/gestion-productos/gestion-productos.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { RegistroComponent } from './pagina/registro/registro.component';
     ModEstadoComponent,
     ModInicioComponent,
     CrearComentarioComponent,
-    ListarProductosComponent
+    ListarProductosComponent,
+    BusquedaComponent,
+    GestionProductosComponent
   ],
   imports: [
     BrowserModule,
