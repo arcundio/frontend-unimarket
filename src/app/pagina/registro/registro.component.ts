@@ -10,19 +10,22 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class RegistroComponent {
   usuario: UsuarioDTO;
-  alerta!:Alerta;
-  
+  alerta!: Alerta;
+
   constructor(private authService: AuthService) {
     this.usuario = new UsuarioDTO();
   }
 
   public registrar() {
+
+    const objeto = this;
+
     this.authService.registrar(this.usuario).subscribe({
       next: data => {
-        console.log(data);
+        objeto.alerta = new Alerta(data.respuesta, "success");
       },
       error: error => {
-        console.log(error);
+        objeto.alerta = new Alerta(error.error.respuesta, "danger");
       }
     });
   }
