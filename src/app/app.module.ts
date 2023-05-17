@@ -16,6 +16,10 @@ import { ListarProductosComponent } from './pagina/listar-productos/listar-produ
 import { RegistroComponent } from './pagina/registro/registro.component';
 import { BusquedaComponent } from './pagina/busqueda/busqueda.component';
 import { GestionProductosComponent } from './pagina/gestion-productos/gestion-productos.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AlertaComponent } from './pagina/alerta/alerta.component';
+import { DetalleProductoComponent } from './pagina/detalle-producto/detalle-producto.component';
+import { CarritoComponent } from './pagina/carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +36,16 @@ import { GestionProductosComponent } from './pagina/gestion-productos/gestion-pr
     CrearComentarioComponent,
     ListarProductosComponent,
     BusquedaComponent,
-    GestionProductosComponent
+    GestionProductosComponent,
+    AlertaComponent,
+    DetalleProductoComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

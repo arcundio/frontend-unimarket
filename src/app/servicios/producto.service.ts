@@ -12,19 +12,23 @@ export class ProductoService {
       ["https://picsum.photos/450/225", "https://picsum.photos/450/225"], ["TECNOLOGIA"]));
     this.productos.push(new ProductoGetDTO(2, "Tenis Nike", "Descripcion 2", 650000, 4,
       ["https://picsum.photos/450/225"], ["ROPA", "DEPORTE"]));
-    this.productos.push(new ProductoGetDTO(2, "Tenis Nike", "Descripcion 2", 650000, 4,
+    this.productos.push(new ProductoGetDTO(3, "Tenis Nike", "Descripcion 2", 650000, 4,
       ["https://picsum.photos/450/225"], ["ROPA", "DEPORTE"]));
-    this.productos.push(new ProductoGetDTO(2, "Tenis Nike", "Descripcion 2", 650000, 4,
+    this.productos.push(new ProductoGetDTO(4, "Tenis Nike", "Descripcion 2", 650000, 4,
       ["https://picsum.photos/450/225"], ["ROPA", "DEPORTE"]));
-    this.productos.push(new ProductoGetDTO(2, "Tenis Nike", "Descripcion 2", 650000, 4,
+    this.productos.push(new ProductoGetDTO(5, "Tenis Nike", "Descripcion 2", 650000, 4,
       ["https://picsum.photos/450/225"], ["ROPA", "DEPORTE"]));
-    this.productos.push(new ProductoGetDTO(2, "Tenis Nike", "Descripcion 2", 650000, 4,
+    this.productos.push(new ProductoGetDTO(6, "Tenis Nike", "Descripcion 2", 650000, 4,
       ["https://picsum.photos/450/225"], ["ROPA", "DEPORTE"]));
-    this.productos.push(new ProductoGetDTO(2, "Tenis Nike", "Descripcion 2", 650000, 4,
+    this.productos.push(new ProductoGetDTO(7, "Tenis Nike", "Descripcion 2", 650000, 4,
       ["https://picsum.photos/450/225"], ["ROPA", "DEPORTE"]));
     //CREE OTROS PRODUCTOS (AL MENOS 6 MÁS)
   }
   public listar(): ProductoGetDTO[] {
     return this.productos;
   }
+  public obtener(codigo: number) {
+    return this.productos[codigo]
+  }
+
 }

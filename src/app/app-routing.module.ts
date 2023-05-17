@@ -13,6 +13,8 @@ import { SubirImagenesComponent } from './pagina/subir-imagenes/subir-imagenes.c
 import { RegistroComponent } from './pagina/registro/registro.component';
 import { BusquedaComponent } from './pagina/busqueda/busqueda.component';
 import { GestionProductosComponent } from './pagina/gestion-productos/gestion-productos.component';
+import { CarritoComponent } from './pagina/carrito/carrito.component';
+import { DetalleProductoComponent } from './pagina/detalle-producto/detalle-producto.component';
 
 const routes: Routes = [
   { path: "", component: InicioComponent},
@@ -27,7 +29,9 @@ const routes: Routes = [
   { path: "pqrs", component: PqrsComponent},
   { path: "subir-imagenes", component: SubirImagenesComponent},
   { path: "busqueda/:texto", component: BusquedaComponent},
-  { path: "gestion-productos", component: GestionProductosComponent}
+  { path: "gestion-productos", component: GestionProductosComponent},
+  { path: "carrito", component: CarritoComponent},
+  { path: "detalle-producto/:codigo", component: DetalleProductoComponent}
 ];
 
 @NgModule({

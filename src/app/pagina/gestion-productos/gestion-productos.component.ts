@@ -65,6 +65,7 @@ export class GestionProductosComponent implements OnInit {
     this.iconTexto = "pencil";
     this.seleccionado = Object.create(item);
   }
+  
   public enviarDatos() {
     if (this.btnTexto == "Actualizar") {
       const indice = this.productos.findIndex(e => this.seleccionado.codigo == e.codigo);
