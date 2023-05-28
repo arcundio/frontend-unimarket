@@ -1,8 +1,12 @@
 <div class="card p-4">
     <div class="mb-3">
+        <!-- 
         <button type="button" class="btn btn-success me-2" (click)="crear()" data-bs-toggle="modal"
             data-bs-target="#crear"><i class="fa-solid fa-plus me-1"></i>
             Crear</button>
+        -->
+        <button type="button" class="btn btn-success me-2" routerLink="/crear-producto">
+            <i class="fa-solid fa-plus me-1"></i> Crear </button>
         <button type="button" class="btn btn-danger" [disabled]="seleccionados.length == 0" data-bs-toggle="modal"
             data-bs-target="#borrar"><i class="fa-solid fa-trash me-1"></i> Eliminar
             {{textoBtnEliminar}}</button>
@@ -40,14 +44,13 @@
                 <td>
                     <p>{{item.unidades}}</p>
                 </td>
-                <td><img [src]="item.imagenes[0]" width="120" /> </td>
+                <td><img [src]="item.imagenes[0].url" width="120" /> </td>
                 <td>
                     <p>{{item.categorias}}</p>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-warning rounded-circle me-2" (click)="actualizar(item)"
-                        data-bs-toggle="modal" data-bs-target="#crear"><i class="fa-solid fa-pen"></i></button>
-
+                    <button type="button" class="btn btn-warning rounded-circle me-2" 
+                        routerLink="/editar-producto"><i class="fa-solid fa-pen"></i></button>
                 </td>
             </tr>
         </tbody>
@@ -81,6 +84,7 @@
                 <button id="cerrar-m" type="button" class="btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
+            <app-crear-producto></app-crear-producto>
             <div class="modal-body">
                 <form #f="ngForm" (ngSubmit)="enviarDatos()">
                     <button class="btn btn-primary"><i class="fa-solid fa-{{iconTexto}} me-1"></i>

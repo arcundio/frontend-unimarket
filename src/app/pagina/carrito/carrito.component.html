@@ -17,7 +17,7 @@
                         <td>
                             <div class="d-flex text-start align-items-center">
                                 <div class="col-4 me-3 ms-3">
-                                    <img [src]="item.producto.imagenes[0]" width="100%" />
+                                    <img [src]="item.producto.imagenes[0].url" width="100%" />
                                 </div>
                                 <span class="col-8">{{item.producto.nombre}}</span>
                             </div>
@@ -29,11 +29,11 @@
 
                             <input type="number" name="unidades" class="form-control
     
-    text-center" [(ngModel)]="item.unidades" min="0" />
+    text-center" [(ngModel)]="item.unidades" min="0" (change)="actualizarValorTotal()"/>
 
                         </td>
                         <td class="align-middle">
-                            <span>$ CALCULAR VALOR (Mutiplicar precio por unidades)</span>
+                            <span>$ {{item.unidades * item.producto.precio}}</span>
                         </td>
                     </tr>
                 </tbody>
@@ -42,8 +42,7 @@
         <div class="mt-5 d-flex justify-content-end">
             <div class="text-end">
                 <h4>Valor a pagar: ${{valorTotal}}</h4>
-                <button class="btn btn-primary"><i class="fa-regular fa-credit-card"></i>
-
+                <button class="btn btn-primary" (click)="realizarCompra()"><i class="fa-regular fa-credit-card"></i>
                     Comprar</button>
             </div>
         </div>
@@ -53,3 +52,5 @@
             el carrito</span>
     </div>
 </div>
+
+<app-alerta [alerta]="alerta"></app-alerta>

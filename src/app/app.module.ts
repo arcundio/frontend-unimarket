@@ -9,17 +9,20 @@ import { LoginComponent } from './pagina/login/login.component';
 import { PqrsComponent } from './pagina/pqrs/pqrs.component';
 import { CuponComponent } from './pagina/cupon/cupon.component';
 import { SubirImagenesComponent } from './pagina/subir-imagenes/subir-imagenes.component';
-import { ModEstadoComponent } from './pagina/mod-estado/mod-estado.component';
-import { ModInicioComponent } from './pagina/mod-inicio/mod-inicio.component';
 import { CrearComentarioComponent } from './pagina/crear-comentario/crear-comentario.component';
 import { ListarProductosComponent } from './pagina/listar-productos/listar-productos.component';
 import { RegistroComponent } from './pagina/registro/registro.component';
 import { BusquedaComponent } from './pagina/busqueda/busqueda.component';
 import { GestionProductosComponent } from './pagina/gestion-productos/gestion-productos.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AlertaComponent } from './pagina/alerta/alerta.component';
 import { DetalleProductoComponent } from './pagina/detalle-producto/detalle-producto.component';
 import { CarritoComponent } from './pagina/carrito/carrito.component';
+import { RevisarProductosComponent } from './pagina/revisar-productos/revisar-productos.component';
+import { UsuarioInterceptor } from './interceptor/usuario.interceptor';
+import { ComprasComponent } from './pagina/compras/compras.component';
+import { EditarProductoComponent } from './pagina/editar-producto/editar-producto.component';
+import { FavoritosComponent } from './pagina/favoritos/favoritos.component';
 
 @NgModule({
   declarations: [
@@ -31,15 +34,17 @@ import { CarritoComponent } from './pagina/carrito/carrito.component';
     PqrsComponent,
     CuponComponent,
     SubirImagenesComponent,
-    ModEstadoComponent,
-    ModInicioComponent,
     CrearComentarioComponent,
     ListarProductosComponent,
     BusquedaComponent,
     GestionProductosComponent,
     AlertaComponent,
     DetalleProductoComponent,
-    CarritoComponent
+    CarritoComponent,
+    RevisarProductosComponent,
+    ComprasComponent,
+    EditarProductoComponent,
+    FavoritosComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,9 @@ import { CarritoComponent } from './pagina/carrito/carrito.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: UsuarioInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

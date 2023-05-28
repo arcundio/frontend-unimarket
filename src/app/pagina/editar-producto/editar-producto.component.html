@@ -29,7 +29,6 @@
                 </button>
             </div>
         </div>
-        <app-alerta [alerta]="alertaImagen"></app-alerta>
         <div>
             <label>Categoría: </label>
             <!--
@@ -42,8 +41,7 @@
                 <input type="checkbox" (change)="onCheckboxChange($event, item)" [checked]="categoriasSeleccionadas.includes(item)"> {{item}}
             </div>
         </div>
-        <button type="submit" [disabled]="f.invalid" class="btn btn-primary" (click)="crearProducto()"> Crear Producto
+        <button type="submit" [disabled]="f.invalid" class="btn btn-primary" (click)="actualizarProducto()"> Actualizar Producto
         </button>
     </form>
 </div>
-<app-alerta [alerta]="alertaProducto"></app-alerta>

@@ -11,17 +11,26 @@ import { ProductoService } from 'src/app/servicios/producto.service';
 export class BusquedaComponent {
 
   textoBusqueda: string;
-  productos: ProductoGetDTO[];
+  productos!: ProductoGetDTO[];
   filtro: ProductoGetDTO[];
 
   constructor(private route: ActivatedRoute, private productoServicio: ProductoService) {
-    this.productos = this.productoServicio.listar();
     this.filtro = [];
     this.textoBusqueda = "";
     this.route.params.subscribe(params => {
       this.textoBusqueda = params["texto"];
+      /*
       this.filtro = this.productos.filter(p =>
         p.nombre.toLowerCase().includes(this.textoBusqueda.toLowerCase()));
+        */
+      this.productoServicio.listarPorNombre(this.textoBusqueda).subscribe({
+        next: data => {
+          this.filtro = data.respuesta;
+        },
+        error: error => {
+          console.log(error.error)
+        }
+      })
     });
   }
 }

@@ -8,6 +8,9 @@ export class CarritoService {
     this.productos = [];
   }
   public agregar(codigo: number) {
+    if (this.productos.includes(codigo)) {
+      throw new Error("El producto ya existe")
+    }
     this.productos.push(codigo);
   }
   public quitar(codigo: number) {

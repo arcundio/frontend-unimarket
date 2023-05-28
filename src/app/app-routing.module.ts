@@ -6,8 +6,6 @@ import { CrearComentarioComponent } from './pagina/crear-comentario/crear-coment
 import { CrearProductoComponent } from './pagina/crear-producto/crear-producto.component';
 import { CuponComponent } from './pagina/cupon/cupon.component';
 import { ListarProductosComponent } from './pagina/listar-productos/listar-productos.component';
-import { ModEstadoComponent } from './pagina/mod-estado/mod-estado.component';
-import { ModInicioComponent } from './pagina/mod-inicio/mod-inicio.component';
 import { PqrsComponent } from './pagina/pqrs/pqrs.component';
 import { SubirImagenesComponent } from './pagina/subir-imagenes/subir-imagenes.component';
 import { RegistroComponent } from './pagina/registro/registro.component';
@@ -15,23 +13,40 @@ import { BusquedaComponent } from './pagina/busqueda/busqueda.component';
 import { GestionProductosComponent } from './pagina/gestion-productos/gestion-productos.component';
 import { CarritoComponent } from './pagina/carrito/carrito.component';
 import { DetalleProductoComponent } from './pagina/detalle-producto/detalle-producto.component';
+import { LoginGuard } from './guards/permiso.service';
+import { RevisarProductosComponent } from './pagina/revisar-productos/revisar-productos.component';
+import { RolesGuard } from './guards/roles.service';
+import { ComprasComponent } from './pagina/compras/compras.component';
+import { FavoritosComponent } from './pagina/favoritos/favoritos.component';
 
 const routes: Routes = [
-  { path: "", component: InicioComponent},
-  { path: "login", component: LoginComponent},
-  { path: "registro", component: RegistroComponent},
-  { path: "crear-comentario", component: CrearComentarioComponent},
-  { path: "crear-producto", component: CrearProductoComponent},
-  { path: "cupon", component: CuponComponent},
-  { path: "listar-productos", component: ListarProductosComponent},
-  { path: "mod-estado", component: ModEstadoComponent},
-  { path: "mod-inicio", component: ModInicioComponent},
-  { path: "pqrs", component: PqrsComponent},
-  { path: "subir-imagenes", component: SubirImagenesComponent},
-  { path: "busqueda/:texto", component: BusquedaComponent},
-  { path: "gestion-productos", component: GestionProductosComponent},
-  { path: "carrito", component: CarritoComponent},
-  { path: "detalle-producto/:codigo", component: DetalleProductoComponent}
+  { path: "", component: InicioComponent },
+  { path: "compras", component: ComprasComponent},
+  { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
+  { path: "registro", component: RegistroComponent, canActivate: [LoginGuard] },
+  { path: "crear-comentario", component: CrearComentarioComponent },
+  {path: "crear-producto", component: CrearProductoComponent, canActivate: [RolesGuard], data: {
+      expectedRole: ["CLIENTE"]}
+  },
+  {path: "editar-producto", component: CrearProductoComponent, canActivate: [RolesGuard], data: {
+    expectedRole: ["CLIENTE"]}
+  },
+  {path: "editar-producto/:codigo", component: CrearProductoComponent, canActivate:[RolesGuard], data: {  
+    expectedRole: ["CLIENTE"] }
+  },
+  { path: "cupon", component: CuponComponent },
+  { path: "listar-productos", component: ListarProductosComponent },
+  { path: "pqrs", component: PqrsComponent },
+  { path: "subir-imagenes", component: SubirImagenesComponent },
+  { path: "busqueda/:texto", component: BusquedaComponent },
+  { path: "gestion-productos", component: GestionProductosComponent, canActivate:[RolesGuard], data: {  
+    expectedRole: ["CLIENTE"] }},
+  { path: "revisar-productos", component: RevisarProductosComponent, canActivate: [RolesGuard],
+data: { expectedRole: ["MODERADOR"] } },
+  { path: "carrito", component: CarritoComponent },
+  { path: "detalle-producto/:codigo", component: DetalleProductoComponent},
+  { path: "favoritos", component: FavoritosComponent}
+  
 ];
 
 @NgModule({

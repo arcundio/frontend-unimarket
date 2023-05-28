@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoGetDTO } from 'src/app/modelo/producto-get-dto';
 import { ProductoService } from 'src/app/servicios/producto.service';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-gestion-productos',
@@ -16,12 +17,21 @@ export class GestionProductosComponent implements OnInit {
   btnTexto: string = "";
   iconTexto: string = "";
 
-  constructor(private productoServicio: ProductoService) {
+  constructor(private productoServicio: ProductoService, private tokenService: TokenService) {
     this.productos = [];
   }
 
   ngOnInit(): void {
-    this.productos = this.productoServicio.listar();
+    // this.productos = this.productoServicio.listar();
+    const userId = this.tokenService.getUserId();
+    this.productoServicio.listarPorUsuario(userId).subscribe({
+      next: data => {
+        this.productos = data.respuesta;
+      },
+      error: error => {
+        console.log(error.error);
+      }
+    })
   }
 
   public seleccionar(producto: ProductoGetDTO, estado: boolean) {
@@ -48,7 +58,19 @@ export class GestionProductosComponent implements OnInit {
 
   public borrarProductos() {
     this.seleccionados.forEach(e => {
-      this.productos = this.productos.filter(i => i != e);
+      // borrada api
+
+    this.productoServicio.eliminar(e.codigo).subscribe({
+      next: data => {
+        console.log(data.respuesta)
+      },
+      error: error => {
+        console.log(error.error)
+      }
+    })
+
+      // borrada lista 
+    this.productos = this.productos.filter(i => i != e);
     });
     this.seleccionados = [];
     this.actualizarMensaje();
@@ -57,7 +79,7 @@ export class GestionProductosComponent implements OnInit {
   public crear() {
     this.btnTexto = "Crear nuevo";
     this.iconTexto = "plus";
-    this.seleccionado = new ProductoGetDTO(0, "", "", 0, 0, [], []);
+    this.seleccionado = new ProductoGetDTO(0, "", "", 0, 0, [], [], false);
   }
 
   public actualizar(item: ProductoGetDTO) {
@@ -65,7 +87,7 @@ export class GestionProductosComponent implements OnInit {
     this.iconTexto = "pencil";
     this.seleccionado = Object.create(item);
   }
-  
+
   public enviarDatos() {
     if (this.btnTexto == "Actualizar") {
       const indice = this.productos.findIndex(e => this.seleccionado.codigo == e.codigo);
