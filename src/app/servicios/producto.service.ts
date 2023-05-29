@@ -5,25 +5,26 @@ import { ProductoDTO } from '../modelo/producto-dto';
 import { Observable } from 'rxjs';
 import { MensajeDTO } from '../modelo/mensaje-dto';
 import { ImagenDTO } from '../modelo/imagen-dto';
+import { ProductoModeradorDTO } from '../modelo/producto-moderador-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
 
-  private authURL = "http://localhost:8081/api/producto";
+  private authURL = "https://unimarket-production-93a9.up.railway.app/api/producto";
 
   productos: ProductoGetDTO[];
   constructor(private http: HttpClient) {
     this.productos = [];
-    this.productos.push(new ProductoGetDTO(1, "Televisor LG 4K", "Descripcion 1", 3500000, 2,
-      [new ImagenDTO("", "https://picsum.photos/450/225"), new ImagenDTO("", "https://picsum.photos/450/225")], ["TECNOLOGIA"], false),);
-    this.productos.push(new ProductoGetDTO(2, "Tenis Nike", "Descripcion 2", 650000, 4,
-      [new ImagenDTO("", "https://picsum.photos/450/225")], ["ROPA", "DEPORTE"], false));
   } 
 
   public crear(producto: ProductoDTO): Observable<MensajeDTO> {
     return this.http.post<MensajeDTO>(`${this.authURL}/crear`, producto);
+  }
+
+  public actualizar(codigoProducto: number, producto: ProductoDTO): Observable<MensajeDTO> {
+    return this.http.put<MensajeDTO>(`${this.authURL}/actualizarProducto/${codigoProducto}`, producto);
   }
 
   public listar(): Observable<MensajeDTO> {
@@ -36,6 +37,22 @@ export class ProductoService {
 
   public listarPorNombre(nombre: string): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.authURL}/listarProductosNombre/${nombre}`);
+  }
+
+  public listarPorCategoria(categoria: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.authURL}/listarProductosCategoria/${categoria}`);
+  }
+
+  public listarFavoritos(codigoUsuario: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.authURL}/listarProductosFavoritos/${codigoUsuario}`);
+  }
+
+  public listarPorEstado(estado: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.authURL}/listarProductosEstado/${estado}`);
+  }
+
+  public actualizarEstado(codigoProducto: number, activo: number, productoModerador: ProductoModeradorDTO): Observable<MensajeDTO> {
+    return this.http.put<MensajeDTO>(`${this.authURL}/actualizarEstado/${codigoProducto}/${activo}`, productoModerador);
   }
 
   /* 

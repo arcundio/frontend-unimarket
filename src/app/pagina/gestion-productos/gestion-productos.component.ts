@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductoGetDTO } from 'src/app/modelo/producto-get-dto';
 import { ProductoService } from 'src/app/servicios/producto.service';
 import { TokenService } from 'src/app/servicios/token.service';
@@ -17,7 +18,8 @@ export class GestionProductosComponent implements OnInit {
   btnTexto: string = "";
   iconTexto: string = "";
 
-  constructor(private productoServicio: ProductoService, private tokenService: TokenService) {
+  constructor(private productoServicio: ProductoService, private tokenService: TokenService,
+    private router: Router) {
     this.productos = [];
   }
 
@@ -96,6 +98,12 @@ export class GestionProductosComponent implements OnInit {
       this.productos.push(this.seleccionado);
     }
     document.getElementById("cerrar-m")?.click();
+  }
+
+  public iraEditarProducto(codigo: number) {
+    if (codigo) {
+      this.router.navigate(["/editar-producto", codigo])
+    }
   }
 
 }

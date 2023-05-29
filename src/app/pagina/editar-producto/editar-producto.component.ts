@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ImagenDTO } from 'src/app/modelo/imagen-dto';
 import { ProductoDTO } from 'src/app/modelo/producto-dto';
 import { CategoriaService } from 'src/app/servicios/categoria.service';
@@ -15,13 +16,30 @@ export class EditarProductoComponent {
   archivos!: FileList;
   categorias: string[];
   categoriasSeleccionadas!: string[];
+  codigoProducto: number;
 
   constructor(private imagenService: ImagenService, private categoriaService: CategoriaService,
-    private productoService: ProductoService) {
+    private productoService: ProductoService, private route: ActivatedRoute) {
+
+      this.codigoProducto = 0;
+      this.producto = new ProductoDTO();
+
+      this.route.params.subscribe(params => {
+        this.codigoProducto = params["codigo"];
+        this.productoService.obtener(this.codigoProducto).subscribe({
+          next: data => {
+            this.producto = data.respuesta;
+            
+          },
+          error: error => {
+            console.log(error.error, "danger");
+          }
+        })
+      })
+
     this.categorias = [];
     this.categoriasSeleccionadas = [];
     this.cargarCategorias();
-    this.producto = new ProductoDTO();
   }
 
   private cargarCategorias() {

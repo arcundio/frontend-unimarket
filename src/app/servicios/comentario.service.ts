@@ -10,11 +10,15 @@ import { ComentarioDTO } from '../modelo/comentario-dto';
 export class ComentarioService {
 
 
-  private catURL = "http://localhost:8081/api/comentario";
+  private catURL = "https://unimarket-production-93a9.up.railway.app/api/comentario";
 
   constructor(private http: HttpClient) { }
 
   public crear(comentario: ComentarioDTO): Observable<MensajeDTO> {
     return this.http.post<MensajeDTO>(`${this.catURL}/crear`, ComentarioDTO);
+  }
+
+  public listarComentarios(codigoProducto: number):Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.catURL}/listar/${codigoProducto}`);
   }
 }

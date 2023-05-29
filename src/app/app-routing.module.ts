@@ -18,6 +18,7 @@ import { RevisarProductosComponent } from './pagina/revisar-productos/revisar-pr
 import { RolesGuard } from './guards/roles.service';
 import { ComprasComponent } from './pagina/compras/compras.component';
 import { FavoritosComponent } from './pagina/favoritos/favoritos.component';
+import { EditarProductoComponent } from './pagina/editar-producto/editar-producto.component';
 
 const routes: Routes = [
   { path: "", component: InicioComponent },
@@ -28,11 +29,8 @@ const routes: Routes = [
   {path: "crear-producto", component: CrearProductoComponent, canActivate: [RolesGuard], data: {
       expectedRole: ["CLIENTE"]}
   },
-  {path: "editar-producto", component: CrearProductoComponent, canActivate: [RolesGuard], data: {
+  {path: "editar-producto/:codigo", component: EditarProductoComponent, canActivate: [RolesGuard], data: {
     expectedRole: ["CLIENTE"]}
-  },
-  {path: "editar-producto/:codigo", component: CrearProductoComponent, canActivate:[RolesGuard], data: {  
-    expectedRole: ["CLIENTE"] }
   },
   { path: "cupon", component: CuponComponent },
   { path: "listar-productos", component: ListarProductosComponent },

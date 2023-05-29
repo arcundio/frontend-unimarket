@@ -11,7 +11,7 @@ import { TokenDTO } from '../modelo/token-dto';
 })
 export class AuthService {
 
-  private authURL = "http://localhost:8081/api/auth";
+  private authURL = "https://unimarket-production-93a9.up.railway.app/api/auth";
 
   constructor(private http: HttpClient) { }
 

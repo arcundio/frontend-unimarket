@@ -9,15 +9,17 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class CompraService {
 
-  private compraURL = "http://localhost:8081/api/compra";
+  private compraURL = "https://unimarket-production-93a9.up.railway.app/api/compra";
 
   constructor(private http: HttpClient) { }
 
   public crear(compra: CompraDTO, cupon: string): Observable<MensajeDTO> {
-
     let params = new HttpParams().set('cupon', cupon);
+    return this.http.post<MensajeDTO>(`${this.compraURL}/crear`, compra, { params: params });
+  }
 
-    return this.http.post<MensajeDTO>(`${this.compraURL}/crear`, compra, {params: params});
+  public listar(codigoUsuario: number): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.compraURL}/listar/${codigoUsuario}`)
   }
 
 }

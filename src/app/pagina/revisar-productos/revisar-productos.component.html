@@ -1,5 +1,33 @@
 <div class="text-center">
-    <button type="button" class="btn btn-primary btn-lg me-3">APROBADOS</button>
-    <button type="button" class="btn btn-primary btn-lg me-3">PENDIENTES</button>
-    <button type="button" class="btn btn-primary btn-lg me-3">RECHAZADOS</button>
+    <button type="button" class="btn btn-primary btn-lg me-3" value="APROBADO"
+        (click)="mostrarProductos('APROBADO')">APROBADOS</button>
+    <button type="button" class="btn btn-primary btn-lg me-3" value="SIN_REVISAR"
+        (click)="mostrarProductos('SIN_REVISAR')">PENDIENTES</button>
+    <button type="button" class="btn btn-primary btn-lg me-3" value="RECHAZADO"
+        (click)="mostrarProductos('RECHAZADO')">RECHAZADOS</button>
+    <app-alerta [alerta]="alerta"></app-alerta>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col" *ngFor="let item of productos">
+            <div class="card shadow-sm">
+                <div class="image-item">
+                    <img src="{{item.imagenes[0].url}}" />
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{item.nombre}}</p>
+                    <p class="card-text">{{item.descripcion}}</p>
+                    <p class="card-text">$ {{item.precio}}</p>
+                    <span class="badge text-bg-primary me-2" *ngFor="let cat of item.categorias">{{cat}}</span>
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div class="btn-group">
+                            <button *ngIf="isRechazados || isPendientes" type="button"
+                                class="btn btn-success" (click)="cambiarEstado('APROBADO', item.codigo)">Aprobar</button>
+                            <button *ngIf="isAprobados || isPendientes" type="button"
+                                class="btn btn-danger" (click)="cambiarEstado('RECHAZADO', item.codigo)">Rechazar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

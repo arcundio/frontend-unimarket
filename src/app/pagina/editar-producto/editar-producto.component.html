@@ -38,7 +38,7 @@
             </select>
             -->
             <div *ngFor="let item of categorias; index as i">
-                <input type="checkbox" (change)="onCheckboxChange($event, item)" [checked]="categoriasSeleccionadas.includes(item)"> {{item}}
+                <input type="checkbox" (change)="onCheckboxChange($event, item)" [checked]="producto.categorias.includes(item)"> {{item}}
             </div>
         </div>
         <button type="submit" [disabled]="f.invalid" class="btn btn-primary" (click)="actualizarProducto()"> Actualizar Producto

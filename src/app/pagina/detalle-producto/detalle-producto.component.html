@@ -1,6 +1,6 @@
 <button (click)="agregarCarrito()" class="btn btn-outline-primary"><i class="fa-solid
     fa-cart-plus me-2"></i>Agregar al carrito</button>
-    
+
 
 <button type="button" class="btn btn-secondary" (click)="agregarFavorito()">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart"
@@ -18,8 +18,8 @@
             <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4"></div>
             <div class="coment-bottom bg-white p-2 px-4">
                 <div class="d-flex flex-row add-comment-section mt-4 mb-4">
-                    <input type="text" class="form-control mr-3" placeholder="Añadir comentario"><button
-                        class="btn btn-primary" type="button">Comentar</button>
+                    <input type="text" class="form-control mr-3" placeholder="Añadir comentario"
+                        name="inputComentario" [(ngModel)]="mensaje"><button class="btn btn-primary" type="button" (click) = "crearComentario()">Comentar</button>
                 </div>
 
                 <div class="commented-section mt-2">

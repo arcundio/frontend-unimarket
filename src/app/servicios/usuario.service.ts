@@ -7,7 +7,7 @@ import { MensajeDTO } from '../modelo/mensaje-dto';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private userUrl = "http://localhost:8081/api/usuario";
+  private userUrl = "https://unimarket-production-93a9.up.railway.app/api/usuario";
   constructor(private http: HttpClient) { }
   public obtener(codigo: number): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.userUrl}/${codigo}`);

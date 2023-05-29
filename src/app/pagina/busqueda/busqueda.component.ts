@@ -19,6 +19,7 @@ export class BusquedaComponent {
     this.textoBusqueda = "";
     this.route.params.subscribe(params => {
       this.textoBusqueda = params["texto"];
+      console.log(params["texto"])
       /*
       this.filtro = this.productos.filter(p =>
         p.nombre.toLowerCase().includes(this.textoBusqueda.toLowerCase()));
