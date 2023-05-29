@@ -5,6 +5,7 @@ import { ProductoDTO } from 'src/app/modelo/producto-dto';
 import { CategoriaService } from 'src/app/servicios/categoria.service';
 import { ImagenService } from 'src/app/servicios/imagen.service';
 import { ProductoService } from 'src/app/servicios/producto.service';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-crear-producto',
@@ -21,7 +22,7 @@ export class CrearProductoComponent {
   alertaProducto!: Alerta;
   
   constructor(private imagenService: ImagenService, private categoriaService: CategoriaService,
-   private productoService: ProductoService) {
+   private productoService: ProductoService, private tokenService: TokenService) {
     this.categorias = [];
     this.categoriasSeleccionadas = [];
     this.cargarCategorias();
@@ -66,6 +67,7 @@ export class CrearProductoComponent {
 
     if (this.producto.imagenes.length > 0) {
       this.producto.categorias = this.categoriasSeleccionadas;
+      this.producto.codigoVendedor = this.tokenService.getUserId();
       console.log(this.producto);
       this.productoService.crear(this.producto).subscribe({
         next: data => {
